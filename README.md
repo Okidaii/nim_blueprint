@@ -168,4 +168,4 @@ outputs/report.md
 
 ## Notes
 
-This version stops at protein structure preparation and GROMACS energy minimization. For drug discovery, the next stages would typically be docking, ligand screening, longer MD, and binding energy analysis.
+This version stops at protein structure preparation and GROMACS energy minimization.
