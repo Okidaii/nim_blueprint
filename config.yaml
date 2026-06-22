@@ -1,0 +1,66 @@
+project:
+  output_dir: outputs
+
+data:
+  dataset: pbmc3k
+  output_h5ad: data/pbmc3k.h5ad
+
+single_cell:
+  input_h5ad: data/pbmc3k.h5ad
+  max_cells: 3000
+  cluster_key: leiden
+  target_gene_fallback: IL7R
+  selection_method: top_score
+  top_n_marker_genes: 20
+
+  qc:
+    min_genes_per_cell: 200
+    min_cells_per_gene: 3
+
+  preprocessing:
+    target_sum: 10000.0
+    n_top_hvg: 2000
+    pca_n_comps: 30
+    n_neighbors: 15
+    n_pcs: 30
+    leiden_resolution: 0.8
+
+uniprot:
+  organism_id: 9606
+  reviewed: true
+  timeout_seconds: 60
+
+alphafold2:
+  prefer_alphafold_db: true
+  use_api_if_db_missing: true
+  alphafold_db_versions: [6, 5, 4, 3, 2, 1]
+  request_timeout_seconds: 120
+
+alphafold2_api:
+  enabled: true
+  endpoint: "https://health.api.nvidia.com/v1/biology/deepmind/alphafold2"
+  status_url: "https://health.api.nvidia.com/v1/status"
+  timeout_seconds: 3600
+  poll_seconds: 30
+  nvcf_poll_seconds: 300
+  algorithm: mmseqs2
+  e_value: 0.0001
+  iterations: 1
+  databases: ["small_bfd"]
+  relax_prediction: false
+  skip_template_search: true
+
+gromacs:
+  enabled: true
+  # Local install: "gmx"
+  # Docker wrapper: "scripts/gmx_docker.sh"
+  gmx_bin: gmx
+  use_gpu: false
+  force_field: amber99sb-ildn
+  water_model: tip3p
+  box_distance: 1.0
+  box_type: cubic
+  solvent_box: spc216.gro
+  minim_mdp: mdp/minim.mdp
+  maxwarn: 2
+  deffnm: em

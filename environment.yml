@@ -1,0 +1,17 @@
+name: nim-blueprint
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pandas
+  - requests
+  - pyyaml
+  - scanpy
+  - anndata
+  - h5py
+  - pip:
+      # Choose one matching your CUDA runtime if using GPU RAPIDS:
+      # - rapids-singlecell-cu12[rapids] --extra-index-url https://pypi.nvidia.com
+      # Install manually as described in README.
+      []
